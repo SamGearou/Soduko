@@ -1,6 +1,8 @@
 
 package soduko;
 
+import java.util.Hashtable;
+import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -13,7 +15,7 @@ import javax.swing.event.ChangeListener;
 public class JSlide extends JSlider implements ChangeListener {
     private final int min = 0; //the min value the JSlider can be
     private final int max = 70; //the max value the JSlider can be
-    private static int timerValue = 10; //the initial value the JSlider will be at
+    private static int timerValue = 23; //the initial value the JSlider will be at
     
     /**
      * Constructor- Sets up the JSlider
@@ -25,9 +27,15 @@ public class JSlide extends JSlider implements ChangeListener {
        setOrientation(JSlider.HORIZONTAL);
        setMinimum(min);
        setMaximum(max);
-       setValue(20);
+       setValue(timerValue);
+       Hashtable labels = new Hashtable();
+       labels.put(0, new JLabel("Fast"));
+       labels.put(max/3, new JLabel("Slow"));
+       labels.put(max, new JLabel("Very Slow"));
+       setLabelTable(labels);
+       setPaintLabels(true); //makes the JSlider labels visible
     }
-
+    
     @Override
     /**
      * Sets the timerValue to be the value that the JSlider is currently at, 
