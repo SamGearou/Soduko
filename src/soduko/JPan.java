@@ -1,17 +1,17 @@
 
 package soduko;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class JPan extends JPanel {
-    
     /**
      * Constructor that initializes the JPanel
      */
     public JPan(){
-        
+      setLayout(new BorderLayout());
     }
     
     @Override

@@ -1,12 +1,17 @@
 
 package soduko;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 
@@ -41,21 +46,24 @@ public class Soduko extends JFrame{
         panel.setBackground(Color.RED);
         panel.setPreferredSize(new Dimension(600,600));
         setContentPane(panel);
+        JSlide slider = new JSlide();
+        slider.addChangeListener(new JSlide());
+        panel.add(slider, BorderLayout.SOUTH);
         pack();
       }
     
     /**
-     * Reads in data from a file and calls the calculateSodukoBoard method to solve the puzzle
+     * Reads in data from a file and solves the Soduko puzzle
      * @param args- the command line arguments
      * @throws IOException 
      */
- public static void main(String[] args) throws IOException{
+ public static void main(String[] args) throws IOException {
      Soduko sod = new Soduko();
      obj.parseFile();
      for(int i=0; i<9; i++){
          for(int j = 0; j<9; j++){
          board[i][j] = obj.getFileContents()[i].charAt(j);
-           sod.getOpenSpot()[i][j] = (board[i][j] == 'b');
+           getOpenSpot()[i][j] = (board[i][j] == 'b');
          }
      }
      sod.calculuateSodukoBoard(false);
@@ -1062,10 +1070,6 @@ public class Soduko extends JFrame{
          markupBoard[x][y] = null;
          findPreemptiveSets();
          calculuateSodukoBoard(true);
-         if (j == 4){
-             super.repaint();
-             break outer;
-         }
          if(isDone()){
              return;
          }
