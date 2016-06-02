@@ -6,6 +6,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+/**
+ * Class that constructs the JPanel
+ * @author Sam Gearou
+ * @date June 2, 2016
+ */
 public class JPan extends JPanel {
     /**
      * Constructor that initializes the JPanel

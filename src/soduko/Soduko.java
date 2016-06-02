@@ -7,8 +7,6 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -17,7 +15,11 @@ import javax.swing.SwingUtilities;
 
 
 
-
+/**
+ * Main class that solves the Soduko puzzle 
+ * @author Sam Gearou
+ * @date June 2, 2016
+ */
 public class Soduko extends JFrame{
     private static int XCoord = 20; //the initial x coordinate for the 81 boxes
     private static int YCoord = 50; //the initial y coordinate for the 81 boxes
@@ -373,7 +375,7 @@ public class Soduko extends JFrame{
          evaluate(i, getOpenSpotsInBox(i), track);
          checkRows(track);
          checkColumns(track);
-         SwingUtilities.invokeAndWait(new Runnable(){ //code to slow down or speed up the Soduko Solving algorithm
+         SwingUtilities.invokeAndWait(new Runnable(){ //code to slow down or speed up the Soduko Solving algorithms
              @Override
              public void run() {
                  try {

@@ -6,6 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Class that reads in the contents of the file that is to represent the Soduko Board
+ * @author Sam Gearou
+ * @date June 2, 2016
+ */
 public class Parse {
     private String[] lines = new String[9]; //String array that holds the contents of the soduko.in file
     /**
