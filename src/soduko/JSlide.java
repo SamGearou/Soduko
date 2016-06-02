@@ -7,8 +7,8 @@ import javax.swing.event.ChangeListener;
 
 public class JSlide extends JSlider implements ChangeListener {
     private final int min = 0;
-    private final int max = 40;
-    private static int timerValue = 20;
+    private final int max = 70;
+    private static int timerValue = 10;
     public JSlide(){
        setMajorTickSpacing(10);
        setMinorTickSpacing(1);

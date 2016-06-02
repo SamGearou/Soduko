@@ -56,8 +56,10 @@ public class Soduko extends JFrame{
      * Reads in data from a file and solves the Soduko puzzle
      * @param args- the command line arguments
      * @throws IOException 
+     * @throws java.lang.InterruptedException 
+     * @throws java.lang.reflect.InvocationTargetException 
      */
- public static void main(String[] args) throws IOException {
+ public static void main(String[] args) throws IOException, InterruptedException, InvocationTargetException {
      Soduko sod = new Soduko();
      obj.parseFile();
      for(int i=0; i<9; i++){
@@ -362,13 +364,27 @@ public class Soduko extends JFrame{
  /**
   * Calculates and solves the Soduko board specified in the soduko.in file
      * @param track- determines when to track solved cells from a guessed markup
+     * @throws java.lang.InterruptedException
+     * @throws java.lang.reflect.InvocationTargetException
   */
- public void calculuateSodukoBoard(boolean track){
+ public void calculuateSodukoBoard(boolean track) throws InterruptedException, InvocationTargetException{
      int stop = 0;
      for(int i =1; i<=9; i++){
          evaluate(i, getOpenSpotsInBox(i), track);
          checkRows(track);
          checkColumns(track);
+         SwingUtilities.invokeAndWait(new Runnable(){ //code to slow down or speed up the Soduko Solving algorithm
+             @Override
+             public void run() {
+                 try {
+                     Thread.sleep(JSlide.getTimerValue() * 100);
+                 } 
+                 catch (InterruptedException ex) {
+                     System.out.println("Interrupted Exception: " + ex);
+                 }
+             }
+         });
+         super.repaint();
          if(!solvedAnyCells){
          stop++;
      }
@@ -376,15 +392,10 @@ public class Soduko extends JFrame{
              i = 0;
              stop = 0;
      }
-         else if(isDone()){
-             super.repaint(); 
-         }
          else if(i == 9 && !isDone() && stop == 9){
              if(track){
                  trackedCells.add(-1); //to distinguish different rounds, "colors"
              }
-             //checkedColumns = true;
-             super.repaint();
          }
  }
  }
@@ -1058,8 +1069,10 @@ public class Soduko extends JFrame{
  
  /**
   * this method solves the rest of the soduko puzzle, if it was not all solved by the calculateSodukoBoard method
+     * @throws java.lang.InterruptedException
+     * @throws java.lang.reflect.InvocationTargetException
   */
- public void evaluateSmallestMarkup(){
+ public void evaluateSmallestMarkup() throws InterruptedException, InvocationTargetException{
      outer: for(int i=0; i<sortMarkups().size()-1; i+=2){
          for(int j = 0; j<markupBoard[sortMarkups().get(i)][sortMarkups().get(i+1)].length(); j++){
          board[sortMarkups().get(i)][sortMarkups().get(i+1)] = markupBoard[sortMarkups().get(i)][sortMarkups().get(i+1)].charAt(j);
